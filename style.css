@@ -230,11 +230,15 @@ body{
     background-color: #212121;
 }
 
-.registersItem div{
+.registersItem > div{
     padding: 8px;
     margin: 0;
 }
 
+.registersItem .registerItemContent{
+    flex: 4;
+}
+
 .registersItem .registerName{
-    flex: 1;
+    margin: 0;
 }

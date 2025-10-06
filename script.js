@@ -266,7 +266,7 @@ onkeydown = (event) => {
 
 
 
-function getRegisterItemSearch(name, address=[]){
+function getRegisterItemSearch(name, description, address=[]){
 
     const registersItem = document.createElement("label");
     registersItem.classList.add("registersItem");
@@ -274,7 +274,10 @@ function getRegisterItemSearch(name, address=[]){
         <div class="checkbox">
             <input type="checkbox" class="registerCheckbox">
         </div>
-        <div class="registerName">${name}</div>
+        <div class="registerItemContent">
+            <div class="registerName">${name}</div>
+            <div class="registerDesc">${description}</div>
+        </div>
         <div class="registerAddress">${address.join(", ")}</div>
     `;
 
@@ -284,7 +287,7 @@ function getRegisterItemSearch(name, address=[]){
 
 function populateRegisterSearchList(){
     registersList.innerHTML = '';
-    REGISTER_LIST.forEach(reg => registersList.appendChild( getRegisterItemSearch(reg.name, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) ));
+    REGISTER_LIST.forEach(reg => registersList.appendChild( getRegisterItemSearch(reg.name, reg.desc, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) ));
 }
 
 
