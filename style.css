@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #181818;
+    color: #fff;
+    user-select: none;
+}
+
+
+#main_screen{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+#mainContainer{
+    height: 100%; 
+    margin-top: 190px;
+}
+
+
+#legendContainer{
+    width: fit-content;
+    background-color: #181818;
+    border: 1px solid #fff;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    padding: 4px;
+    position: fixed; 
+    top: 0;
+    display: none;
+}
+.legendContainerActive{
+    display: initial !important;
+}
+
+.legendRow{
+    display: grid;
+    font-size: 0.8em;
+    padding: 1px 0;
+    grid-template-columns: repeat(4, 1fr);
+}
+.legendRow div{
+    white-space: nowrap; 
+    width: 0;
+}
+
+
+#registerList{
+    height: 100%;
+    display: flex; 
+    flex-direction: column;
+    gap: 16px;
+} 
+
+.register{
+    width: 100%; 
+    background-color: #101010;
+    padding: 8px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+} 
+
+.registerName{
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+
+.registerGrid{
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+.gridRow{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    justify-items: center;
+}
+
+.gridRow:nth-child(2){
+    gap: 1px;
+    margin: 1px 0;
+}
+
+.gridRow:nth-child(2) .gridCell{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+
+.gridRow:last-child{
+    font-size: 0.8em;
+}
+.gridRow:last-child .gridCell:first-child{
+    grid-column: 1 / span 7;
+    text-align-last: left;
+}
+.gridRow:last-child .gridCell:last-child{
+    text-align-last: right;
+    
+}
+
+
+
+.gridCell{
+    width: 100%;
+    height: 100%;
+    background-color: #101010;
+    text-align: center;
+    padding: 2px 8px;
+}
+.gridRow:nth-child(2) .gridCell:hover{
+    cursor: pointer;
+}
+
+.gridCellShaded{
+    background-color: #212121;
+}
+
+
+
+.registerBitList{
+    margin-top: 8px;
+}
+
+.bitContainer{
+    display: grid;
+    grid-template-columns: calc(100%/8) 1fr;
+    padding-bottom: 4px;
+}
+
+.registerBitList:has(.bitContainerActive) .bitContainer:not(.bitContainerActive) span,
+.registerBitList:has(.bitContainer:hover) .bitContainer:not(:hover) span,
+.registerBitList:has(.bitContainerActive) .bitContainer:not(.bitContainerActive),
+.registerBitList:has(.bitContainer:hover) .bitContainer:not(:hover),
+.gridRow:nth-child(2):has(.gridCellBitNameActive) .gridCellBitName:not(.gridCellBitNameActive){
+    color: #ffffff20 !important;
+}
+
+
+.bitNumber{
+    width: fit-content;
+}
+
+.registerBitList{
+    color: #bdbdbd;
+}
+.registerBitList span{
+    font-weight: 500;
+    color: #fff;
+}
+.bitTextUnderline{
+    text-decoration: underline;
+}

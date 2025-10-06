@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Microchip Style Register</title>
+</head>
+
+
+<body>
+
+
+    <div id="main_screen">
+
+        <div id="mainContainer">
+
+            <div id="legendContainer" class="legendContainerActive" title="Press 'L' to toggle">
+                <div class="legendRow">
+                    <strong>Legend:</strong>
+                </div>
+                <div class="legendRow">
+                    <div>R = Readable bit</div>
+                    <div>W = Writable bit</div>
+                    <div>U = Unimplemented bit, read as '0'</div>
+                </div>
+                <div class="legendRow">
+                    <div>-n = Value at POR</div> 
+                    <div>'1' = Bit is set</div> 
+                    <div>'0' = Bit is cleared</div> 
+                    <div>x = Bit is unknown</div> 
+                </div>
+            </div>
+
+            <div id="registerList"></div>
+
+        </div>
+
+    </div>
+    
+
+    <script src="script.js"></script>
+
+</body>
+</html>
