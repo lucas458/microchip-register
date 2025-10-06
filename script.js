@@ -262,3 +262,59 @@ onkeydown = (event) => {
         legendContainer.classList.toggle("legendContainerActive");
     }
 };
+
+
+
+
+function getRegisterItemSearch(name, address=[]){
+
+    const registersItem = document.createElement("label");
+    registersItem.classList.add("registersItem");
+    registersItem.innerHTML = `
+        <div class="checkbox">
+            <input type="checkbox" class="registerCheckbox">
+        </div>
+        <div class="registerName">${name}</div>
+        <div class="registerAddress">${address.join(", ")}</div>
+    `;
+
+    return registersItem;
+
+}
+
+function populateRegisterSearchList(){
+    registersList.innerHTML = '';
+    REGISTER_LIST.forEach(reg => registersList.appendChild( getRegisterItemSearch(reg.name, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) ));
+}
+
+
+searchInput.oninput = (event) => {
+    const searchString = event.target.value.trim().toLowerCase();
+
+    searchButton.classList.toggle("searchButtonActive", searchString.length > 0);
+    registersList.innerHTML = '';
+
+    if ( searchString.length == 0 ){ 
+        populateRegisterSearchList();
+        return;
+    }
+
+
+    REGISTER_LIST.forEach((reg, i) => {
+        
+        const registerName = reg.name.toLowerCase(); 
+        const registerDesc = reg.desc.toLowerCase();
+        let registerVisible = (searchString.length == 0) || registerName.includes(searchString) || registerDesc.includes(searchString);
+        
+        if ( registerVisible ) {
+            registersList.appendChild( getRegisterItemSearch(reg.name, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) );
+        }
+
+    });
+
+}
+
+
+onload = () => {
+    populateRegisterSearchList();
+}
