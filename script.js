@@ -276,6 +276,7 @@ onkeydown = (event) => {
 
     if ( event.key == 'Escape' ){
         registers_screen.style.display = 'flex';
+        searchInput.focus();
     }
 
 };
@@ -303,9 +304,8 @@ function getRegisterItemSearch(name, description, address=[]){
         const allCheckboxes = Array.from(registersList.querySelectorAll(".registerCheckbox"));
         const allSelected = allCheckboxes.every(e => e.checked);
         selectAllButton.innerHTML = allSelected? "Unselect All" : "Select All";
-
         generateButton.classList.toggle("buttonActive", allCheckboxes.some(e => e.checked));
-
+        searchInput.focus();
     }
 
     return registersItem;
@@ -368,4 +368,5 @@ selectAllButton.onclick = () => {
 
 onload = () => {
     populateRegisterSearchList();
+    searchInput.focus();
 }
