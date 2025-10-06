@@ -205,62 +205,73 @@ function getRegister( object = {} ){
 
 
 
-registerList.innerHTML = "";
-REGISTER_LIST.forEach(reg => registerList.appendChild(getRegister(reg)) );
-legendContainer.style.width = registerList.offsetWidth + 'px';
 
+function generateRegisterByList( list = [] ){
+    registerList.innerHTML = "";
+    list.forEach(reg => registerList.appendChild(getRegister(reg)) );
+    legendContainer.style.width = registerList.offsetWidth + 'px';
 
-document.querySelectorAll(".register").forEach(register => {
-
-    register.querySelectorAll(".gridCellBitName").forEach((gridCellBitNameElement, bitIndex) => {
-        gridCellBitNameElement.onmouseenter = gridCellBitNameElement.onmouseleave = gridCellBitNameElement.onblur = (event) => {
-            const consume = gridCellBitNameElement.getAttribute("consume");
-            
-            document.querySelectorAll(".bitContainerActive").forEach(e => e.classList.remove("bitContainerActive"));
-            document.querySelectorAll(".gridCellBitNameActive").forEach(e => e.classList.remove("gridCellBitNameActive"));
-
-            if ( event.type == 'mouseenter' ){
-                register.querySelectorAll(`.gridRow:nth-child(2) .gridCellBitName[consume='${consume}']`)
-                    .forEach(e => e.classList.add("gridCellBitNameActive"));
-
-                Array.from(register.querySelectorAll(".bitContainer"))
-                    .filter(e => consume == e.querySelector(".bitNumber").innerHTML.substr(4))
-                    .forEach(e => e.classList.add("bitContainerActive"));
-            }
-
+    document.querySelectorAll(".register").forEach(register => {
+    
+        register.querySelectorAll(".gridCellBitName").forEach((gridCellBitNameElement, bitIndex) => {
+            gridCellBitNameElement.onmouseenter = gridCellBitNameElement.onmouseleave = gridCellBitNameElement.onblur = (event) => {
+                const consume = gridCellBitNameElement.getAttribute("consume");
+                
+                document.querySelectorAll(".bitContainerActive").forEach(e => e.classList.remove("bitContainerActive"));
+                document.querySelectorAll(".gridCellBitNameActive").forEach(e => e.classList.remove("gridCellBitNameActive"));
+    
+                if ( event.type == 'mouseenter' ){
+                    register.querySelectorAll(`.gridRow:nth-child(2) .gridCellBitName[consume='${consume}']`)
+                        .forEach(e => e.classList.add("gridCellBitNameActive"));
+    
+                    Array.from(register.querySelectorAll(".bitContainer"))
+                        .filter(e => consume == e.querySelector(".bitNumber").innerHTML.substr(4))
+                        .forEach(e => e.classList.add("bitContainerActive"));
+                }
+    
+            };
+    
+        });
+    
+    
+        register.querySelectorAll(".bitContainer").forEach(bitContainer => {
+            bitContainer.onmouseenter = bitContainer.onmouseleave = bitContainer.onblur = (event) => {
+    
+                document.querySelectorAll(".gridCellBitNameActive").forEach(e => e.classList.remove("gridCellBitNameActive"));
+    
+                if ( event.type == 'mouseenter' ){
+                    const consumeFounded = bitContainer.querySelector(".bitNumber").innerHTML.substr(4);
+                    register.querySelectorAll(`.gridCellBitName[consume='${consumeFounded}']`)
+                        .forEach(e => e.classList.add("gridCellBitNameActive"));
+                }
+    
+            };
+    
+        });
+    
+    
+        register.onclick = () => {
+            main_screen.scrollTo({top: register.offsetTop-95, behavior: "smooth"});
         };
-
+    
+    
     });
 
-
-    register.querySelectorAll(".bitContainer").forEach(bitContainer => {
-        bitContainer.onmouseenter = bitContainer.onmouseleave = bitContainer.onblur = (event) => {
-
-            document.querySelectorAll(".gridCellBitNameActive").forEach(e => e.classList.remove("gridCellBitNameActive"));
-
-            if ( event.type == 'mouseenter' ){
-                const consumeFounded = bitContainer.querySelector(".bitNumber").innerHTML.substr(4);
-                register.querySelectorAll(`.gridCellBitName[consume='${consumeFounded}']`)
-                    .forEach(e => e.classList.add("gridCellBitNameActive"));
-            }
-
-        };
-
-    });
+}
 
 
-    register.onclick = () => {
-        main_screen.scrollTo({top: register.offsetTop-95, behavior: "smooth"});
-    };
 
-
-});
 
 
 onkeydown = (event) => {
     if ( !event.repeat && event.key.toUpperCase() == 'L' ){
         legendContainer.classList.toggle("legendContainerActive");
     }
+
+    if ( event.key == 'Escape' ){
+        registers_screen.style.display = 'flex';
+    }
+
 };
 
 
@@ -294,7 +305,6 @@ function populateRegisterSearchList(){
 searchInput.oninput = (event) => {
     const searchString = event.target.value.trim().toLowerCase();
 
-    searchButton.classList.toggle("searchButtonActive", searchString.length > 0);
     registersList.innerHTML = '';
 
     if ( searchString.length == 0 ){ 
@@ -311,6 +321,20 @@ searchInput.oninput = (event) => {
             registersList.appendChild( tempRegisterItem );
         });
 
+}
+
+
+searchButton.onclick = () => {
+    const selectedRegisters = Array.from(registersList.querySelectorAll(".registerCheckbox:checked"))
+        .map(e => e.parentElement.nextElementSibling.querySelector(".registerName").innerHTML);
+
+    if ( selectedRegisters.length == 0 ) return;
+
+    generateRegisterByList( REGISTER_LIST.filter(e => selectedRegisters.includes(e.name)) );
+    main_screen.scrollTo({top: 0, behavior: "smooth"});
+
+    registers_screen.style.display = 'none';
+    
 }
 
 
