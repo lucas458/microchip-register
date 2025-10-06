@@ -341,6 +341,9 @@ searchInput.oninput = (event) => {
 
 
 searchButton.onclick = () => {
+
+    if ( !searchButton.classList.contains("searchButtonActive") ) return;
+
     const selectedRegisters = Array.from(registersList.querySelectorAll(".registerCheckbox:checked"))
         .map(e => e.parentElement.nextElementSibling.querySelector(".registerName").innerHTML);
 
