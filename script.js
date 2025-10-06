@@ -298,6 +298,13 @@ function getRegisterItemSearch(name, description, address=[]){
         <div class="registerAddress">${address.join(", ")}</div>
     `;
 
+    registersItem.querySelector(".registerCheckbox").onchange = (event) => {
+        event.stopPropagation();
+        const allCheckboxes = Array.from(registersList.querySelectorAll(".registerCheckbox"));
+        const allSelected = allCheckboxes.every(e => e.checked);
+        selectAllButton.innerHTML = allSelected? "Unselect All" : "Select All";
+    }
+
     return registersItem;
 
 }
@@ -341,6 +348,14 @@ searchButton.onclick = () => {
 
     registers_screen.style.display = 'none';
     
+}
+
+
+selectAllButton.onclick = () => {
+    const allCheckboxes = Array.from(registersList.querySelectorAll(".registerCheckbox"));
+    const allSelected = allCheckboxes.every(e => e.checked);
+    allCheckboxes.forEach(e => e.checked = !allSelected);
+    selectAllButton.innerHTML = allSelected? "Select All" : "Unselect All";
 }
 
 
