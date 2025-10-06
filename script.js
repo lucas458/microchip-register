@@ -310,7 +310,7 @@ searchInput.oninput = (event) => {
         let registerVisible = (searchString.length == 0) || registerName.includes(searchString) || registerDesc.includes(searchString);
         
         if ( registerVisible ) {
-            registersList.appendChild( getRegisterItemSearch(reg.name, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) );
+            registersList.appendChild( getRegisterItemSearch(reg.name, reg.desc, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) );
         }
 
     });
