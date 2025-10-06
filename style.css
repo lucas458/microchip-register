@@ -204,7 +204,7 @@ body{
     margin-left: 8px;
 }
 
-.searchButtonActive{
+.buttonActive{
     background-color: #424242 !important;
     cursor: pointer;
 }

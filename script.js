@@ -304,7 +304,7 @@ function getRegisterItemSearch(name, description, address=[]){
         const allSelected = allCheckboxes.every(e => e.checked);
         selectAllButton.innerHTML = allSelected? "Unselect All" : "Select All";
 
-        searchButton.classList.toggle("searchButtonActive", allCheckboxes.some(e => e.checked));
+        generateButton.classList.toggle("buttonActive", allCheckboxes.some(e => e.checked));
 
     }
 
@@ -340,9 +340,9 @@ searchInput.oninput = (event) => {
 }
 
 
-searchButton.onclick = () => {
+generateButton.onclick = () => {
 
-    if ( !searchButton.classList.contains("searchButtonActive") ) return;
+    if ( !generateButton.classList.contains("buttonActive") ) return;
 
     const selectedRegisters = Array.from(registersList.querySelectorAll(".registerCheckbox:checked"))
         .map(e => e.parentElement.nextElementSibling.querySelector(".registerName").innerHTML);
@@ -362,7 +362,7 @@ selectAllButton.onclick = () => {
     const allSelected = allCheckboxes.every(e => e.checked);
     allCheckboxes.forEach(e => e.checked = !allSelected);
     selectAllButton.innerHTML = allSelected? "Select All" : "Unselect All";
-    searchButton.classList.toggle("searchButtonActive", allCheckboxes.some(e => e.checked));
+    generateButton.classList.toggle("buttonActive", allCheckboxes.some(e => e.checked));
 }
 
 
