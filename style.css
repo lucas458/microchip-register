@@ -162,3 +162,79 @@ body{
 .bitTextUnderline{
     text-decoration: underline;
 }
+
+
+
+#registers_screen{
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    background-color: #181818;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: fixed;
+}
+
+#registersContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#searchInput{
+    width: 320px;
+    padding: 8px;
+    margin: 4px 0;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+}
+
+#searchButton{
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: #212121;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.searchButtonAcive{
+    background-color: #424242 !important;
+    cursor: pointer;
+}
+
+#registersList{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.registersItem{
+    /* width: fit-content; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.registersItem:hover{
+    cursor: pointer;
+    background-color: #212121;
+}
+
+.registersItem div{
+    padding: 8px;
+    margin: 0;
+}
+
+.registersItem .registerName{
+    flex: 1;
+}
