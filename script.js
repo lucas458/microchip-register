@@ -264,8 +264,14 @@ function generateRegisterByList( list = [] ){
 
 
 onkeydown = (event) => {
-    if ( !event.repeat && event.key.toUpperCase() == 'L' ){
+
+    if ( event.repeat ){
+        return;
+    }
+
+    if ( event.key.toUpperCase() == 'L' ){
         legendContainer.classList.toggle("legendContainerActive");
+        return;
     }
 
     if ( event.key == 'Escape' ){
