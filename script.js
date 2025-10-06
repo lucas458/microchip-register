@@ -359,6 +359,7 @@ selectAllButton.onclick = () => {
     const allSelected = allCheckboxes.every(e => e.checked);
     allCheckboxes.forEach(e => e.checked = !allSelected);
     selectAllButton.innerHTML = allSelected? "Select All" : "Unselect All";
+    searchButton.classList.toggle("searchButtonActive", allCheckboxes.some(e => e.checked));
 }
 
 
