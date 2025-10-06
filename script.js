@@ -303,6 +303,9 @@ function getRegisterItemSearch(name, description, address=[]){
         const allCheckboxes = Array.from(registersList.querySelectorAll(".registerCheckbox"));
         const allSelected = allCheckboxes.every(e => e.checked);
         selectAllButton.innerHTML = allSelected? "Unselect All" : "Select All";
+
+        searchButton.classList.toggle("searchButtonActive", allCheckboxes.some(e => e.checked));
+
     }
 
     return registersItem;
