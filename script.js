@@ -302,18 +302,14 @@ searchInput.oninput = (event) => {
         return;
     }
 
-
-    REGISTER_LIST.forEach((reg, i) => {
-        
-        const registerName = reg.name.toLowerCase(); 
-        const registerDesc = reg.desc.toLowerCase();
-        let registerVisible = (searchString.length == 0) || registerName.includes(searchString) || registerDesc.includes(searchString);
-        
-        if ( registerVisible ) {
-            registersList.appendChild( getRegisterItemSearch(reg.name, reg.desc, reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0))) );
-        }
-
-    });
+    REGISTER_LIST
+        .filter(e => 
+            e.name.toLowerCase().includes(searchString) || e.desc.toLowerCase().includes(searchString) )
+        .forEach(reg => {
+            const addressString = reg.address.map(e => '0x'+e.toString(16).toUpperCase().padStart(2,0));
+            const tempRegisterItem = getRegisterItemSearch(reg.name, reg.desc, addressString);
+            registersList.appendChild( tempRegisterItem );
+        });
 
 }
 
